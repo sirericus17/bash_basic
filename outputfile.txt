@@ -1,0 +1,249 @@
+array.sh
+comsub.sh
+env.sh
+error.sh
+expression.sh
+forsample.sh
+intersc.sh
+readsample.sh
+simpleif.sh
+substitution.sh
+svrarray.sh
+testfile.sh
+test.sh
+varexample.sh
+
+File name: array.sh
+
+Contents: #!/bin/bash
+
+SERVERLIST=("websvr1" "websvr2" "websvr3" "websvr4")
+COUNT=0
+
+for INDEX in ${SERVERLIST[@]}; do
+  echo "processing server: ${SERVERLIST[COUNT]}"
+  COUNT="`expr $COUNT + 1`"
+done
+
+echo ""
+echo ""
+
+
+for x in ${SERVERLIST[@]}; do
+  echo "processing server: $x" # ${SERVERLIST[COUNT]}"
+ # x="`expr $COUNT + 1`"
+done
+File name: comsub.sh
+
+Contents: #!/bin/bash
+
+
+shopt -s expand_aliases 	#use shopt command to enable aliases within the sripts shell. 
+
+alias TODAY="date"
+alias UFILES="find /root -user root"
+#alias UFILES="find /home -user cloud_user"
+
+
+USERFILE=`find /home -user cloud_user`
+TODAYSDATE=`date`
+
+echo "Todays date is $TODAYSDATE"
+#echo "These are the user files: $USERFILE"
+
+
+
+A=`TODAY`
+B=`UFILES`
+
+echo "This is today date: $A"
+echo "These are the files: $B"
+File name: env.sh
+
+Contents: #!/bin/bash
+
+clear
+
+echo "This script will give us environment information"
+echo "================================================"
+echo ""
+echo "Hello Username: $USER"
+echo ""
+echo "Your Home Directory is: $HOME"
+echo ""
+echo "Your History File Will Ignore: $HISTCONTROL"
+echo ""
+echo "Your Terminal Session Type is: $TERM"
+echo ""
+File name: error.sh
+
+Contents: #!/bin/bash
+
+set -e
+
+expr 1 + 5
+echo $?
+
+rm doodles.sh
+echo $?
+
+expr 10 + 10
+echo $?
+File name: expression.sh
+
+Contents: #!/bin/bash
+#expression evaluation
+
+
+expr 2 + 2		#Be mindful of the spacing before and after the operators.
+
+expr 2 + 2 \* 4 	#Always excape the multiplication operator. eg. \* 
+
+expr \( 2 + 2 \) \* 4	#Excape parenteses when grouping numbers.
+File name: forsample.sh
+
+Contents: #!/bin/bash
+
+SHELLSCRIPTS=(`ls *.sh`)
+
+echo ${SHELLSCRIPTS[@]} | tr ' ' '\n'
+echo ""
+
+if [ -d /root/bin ]; then
+  for SCRIPTS in "${SHELLSCRIPTS[@]}"; do
+    DISPLAY="`cat $SCRIPTS`"
+    echo "File name: $SCRIPTS"
+    echo ""
+    echo "Contents: $DISPLAY"
+  done
+fi
+File name: intersc.sh
+
+Contents: #!/bin/bash
+
+echo "Pease enter your first name: "
+read FIRSTNAME
+echo ""
+echo "Pease enter your last name"
+read LASTNAME
+echo ""
+echo "Enter your age: "
+read USERAGE
+echo ""
+echo "Hello $FIRSTNAME $LASTNAME"
+echo "Your age is: $USERAGE"
+echo ""
+echo "You will be `expr $USERAGE + 10` years old in 10 years"
+File name: readsample.sh
+
+Contents: #!/bin/bash
+
+echo "Enter your First Name: "
+read FIRSTNAME
+echo "Enter your Last Name: "
+read LASTNAME
+echo ""
+echo "Enter your age: "
+read USERAGE
+echo ""
+echo "Your full name is: $FIRSTNAME $LASTNAME"
+echo ""
+echo "In 10 years, you will be `expr $USERAGE + 10` years old!"
+File name: simpleif.sh
+
+Contents: #!/bin/bash
+
+echo "Guess a number between 1 and 5"
+
+read GUESS
+
+if [ $GUESS -eq 3 ]
+  then
+    echo "You Guessed the correct Number!"
+fi
+File name: substitution.sh
+
+Contents: #!/bin/bash
+
+#This script is to show cpmmand substitution
+
+shopt -s expand_aliases 	#use shopt command to enable aliases within the sripts shell. 
+
+alias TODAY="date"
+alias UFILES="find /home -user cloud_user"
+
+TODAYSDATE=`date`
+USERFILES=`find /home -user cloud_user`
+
+echo "Today\'s Date: $TODAYSDATE"
+#echo "All Files Owned by CLOUD_USER: $USERFILES"
+
+A=`TODAY`
+B=`UFILES`
+
+echo "With Alias, TODAY is $A"
+echo "With Alias, UFILES is $B"
+File name: svrarray.sh
+
+Contents: #!/bin/bash
+
+SERVERLIST=("websvr1" "websvr2" "websvr3" "websvr4")
+
+for INDEX in ${SERVERLIST[@]}; do
+  echo "Server name: ${SERVERLIST[$INDEX]}"
+done
+
+echo ""
+echo "OR"
+echo ""
+
+COUNT=0
+for INDEX in ${SERVERLIST[@]}; do
+  echo "Server name: ${SERVERLIST[$COUNT]}"
+  COUNT=$COUNT+1
+done
+File name: testfile.sh
+
+Contents: #!/bin/bash
+
+FILENAME=$1
+echo "Testing for the existence of a file called $FILENAME"
+
+if [ -f $FILENAME ]
+  then
+    echo "File $FILENAME Does exists"
+fi
+
+echo ""
+echo ""
+
+
+if [ -f $FILENAME ] && [ -r $FILENAME ]
+  then
+    echo "File $FILENAME exists AND is readable"
+fi
+File name: test.sh
+
+Contents: #!/bin/bash
+
+clear
+
+echo "Hello World"
+File name: varexample.sh
+
+Contents: #!/bin/bash
+
+
+#echo "The current path is: $PATH"
+
+MYUSERNAME="cloud_user"
+MYPASSWORD="perscoba17@!"
+STARTOFSCRIPT=`date`
+
+echo "My login name for this application is: $MYUSERNAME"
+echo "My loging password is: $MYPASSWORD"
+echo "I started this script at: $STARTOFSCRIPT"
+
+ENDOFSCRIPT=`date`
+
+echo "I ended this script at: $ENDOFSCRIPT"
