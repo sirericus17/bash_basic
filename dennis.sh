@@ -12,9 +12,11 @@ Texas.
 
 
 
-
-
-Eric
+Eric Osei-wusu
 San Leandro
+California
+
+
+San Francisco
 California
 
